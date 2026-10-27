@@ -1,0 +1,16 @@
+﻿.page-enter-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+  background: #000;
+  transition: opacity 2.1s ease, visibility 2.1s ease;
+}
+
+.page-enter-curtain.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+

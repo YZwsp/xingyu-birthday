@@ -1,0 +1,113 @@
+﻿body.cake-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+}
+
+.cake-shell {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(100%, 900px);
+  min-height: 100vh;
+  place-items: center;
+  padding: 76px 24px 46px;
+  text-align: center;
+}
+
+.cake-content {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  width: min(100%, 720px);
+}
+
+.cake-kicker {
+  margin: 0 0 14px;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 0.38em;
+}
+
+.cake-title {
+  margin: 0;
+  font-family: "STKaiti", "KaiTi", "Microsoft YaHei", sans-serif;
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.cake-copy {
+  width: min(100%, 560px);
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.cake-art {
+  width: min(84vw, 420px);
+  margin: 16px auto 2px;
+  filter: drop-shadow(0 28px 42px rgba(0, 0, 0, 0.32));
+  animation: cakeFloat 5s ease-in-out infinite;
+}
+
+@keyframes cakeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.cake-flame {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: flame 420ms ease-in-out infinite alternate;
+}
+
+.cake-flame:nth-of-type(2) {
+  animation-delay: 120ms;
+  animation-duration: 520ms;
+}
+
+.cake-flame:nth-of-type(3) {
+  animation-delay: 250ms;
+  animation-duration: 380ms;
+}
+
+@keyframes flame {
+  from { transform: scaleY(0.86) scaleX(0.92) rotate(-2deg); opacity: 0.75; }
+  to { transform: scaleY(1.1) scaleX(1.04) rotate(2deg); opacity: 1; }
+}
+
+.cake-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.cake-actions .soft-link {
+  border-color: rgba(255, 227, 165, 0.74);
+}
+
+.cake-footnote {
+  margin: 20px 0 0;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 640px) {
+  .cake-shell {
+    padding-top: 62px;
+  }
+
+  .cake-copy {
+    font-size: 15px;
+  }
+
+  .cake-art {
+    width: min(92vw, 360px);
+  }
+}

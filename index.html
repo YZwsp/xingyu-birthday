@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1214">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <title>思萍，生日快乐</title>
+  <link rel="stylesheet" href="css/birthday.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page friend-cover">
+  <iframe class="birthday-frame" id="birthdayFrame" src="about:blank" title="思萍的生日祝福" allow="autoplay; fullscreen"></iframe>
+
+  <main class="cover-stage" id="coverStage">
+    <div class="letter-envelope" id="letterEnvelope">
+      <div class="letter-envelope__back"></div>
+
+      <div class="letter-paper">
+        <span class="letter-paper__date">2026 · 10 · 28</span>
+        <h2>思萍：</h2>
+        <p>生日快乐！<br>没什么大事，就是记得这个有些特别的日子。<br>做了个有意思的小东西，你慢慢看。<br>不用急着回，希望你能喜欢。</p>
+        <strong>建坤</strong>
+        <button class="letter-next" id="letterNextButton" type="button" hidden>下一步</button>
+      </div>
+
+      <div class="letter-envelope__pocket"></div>
+      <div class="letter-envelope__flap"></div>
+
+      <div class="letter-envelope__front">
+        <p class="letter-cover__kicker">2026 · 10 · 28</p>
+        <h1 class="letter-cover__title">思萍</h1>
+        <p class="letter-cover__wish">生日快乐</p>
+        <p class="letter-cover__name">一份小东西 · 来自吴建坤</p>
+        <button class="receive-button" id="receiveButton" type="button">拆开</button>
+        <button class="skip-button" id="skipButton" type="button" hidden>赶时间的话，直接看文字</button>
+      </div>
+    </div>
+  </main>
+
+  <button class="audio-toggle shell-audio-toggle" id="shellAudioToggle" type="button" data-playing="false" aria-label="播放或暂停背景音乐">♪</button>
+  <audio id="shellAudio" src="music/1.mp3" preload="auto" loop playsinline></audio>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

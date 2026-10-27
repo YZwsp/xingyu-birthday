@@ -1,0 +1,346 @@
+html,
+body.memories-page {
+  min-height: 100%;
+}
+
+body.memories-page {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #0b1328;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+.memories-page #fullpage {
+  height: auto;
+}
+
+body.memories-page {
+  background: #0b1328;
+}
+
+.memories-page .section {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  padding: 68px 56px;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+.memories-page .section::before,
+.memories-page .section::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+.memories-page .section::before {
+  width: 44vw;
+  height: 44vw;
+  right: -18vw;
+  top: -19vw;
+  background: radial-gradient(circle, rgba(242, 201, 125, 0.12), transparent 68%);
+}
+
+.memories-page .section::after {
+  width: 38vw;
+  height: 38vw;
+  left: -17vw;
+  bottom: -20vw;
+  background: radial-gradient(circle, rgba(231, 165, 171, 0.12), transparent 68%);
+}
+
+.section--opening {
+  background: linear-gradient(140deg, #101c39 0%, #172749 48%, #202d4c 100%);
+}
+
+.section--run {
+  background: linear-gradient(145deg, #0b152d 0%, #111e3b 58%, #1d2945 100%);
+}
+
+.section--distance {
+  background: linear-gradient(145deg, #15162d 0%, #251e36 58%, #32243a 100%);
+}
+
+.section--understand {
+  background: linear-gradient(145deg, #0c1d29 0%, #122b38 58%, #183744 100%);
+}
+
+.section--final {
+  background: linear-gradient(140deg, #101b31 0%, #23304b 50%, #473746 100%);
+}
+
+.section--final .wish-card {
+  border-color: rgba(255, 227, 165, 0.24);
+}
+
+/* 最后一屏字数多一点，收一收间距，别让手机上一屏装不下 */
+.section--final .wish-card {
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.section--final .story-title {
+  font-size: clamp(30px, 4.4vw, 46px);
+}
+
+.section--final .story-lines {
+  margin-top: 18px;
+}
+
+.section--final .story-lines p {
+  margin: 0.5em 0;
+}
+
+.section--final .story-quote {
+  margin-top: 4px;
+  padding: 8px 14px;
+}
+
+.section--final .wish-signature {
+  margin-top: 20px;
+}
+
+.section--final .gift-trigger,
+.section--final .egg-link {
+  margin-top: 18px;
+}
+
+@supports (min-height: 100svh) {
+  .memories-page .section {
+    min-height: 100svh;
+  }
+}
+
+@media (max-width: 640px) {
+  .section--final .wish-card {
+    padding: 22px 20px;
+  }
+
+  .section--final .story-title {
+    font-size: 26px;
+  }
+
+  .section--final .gift-trigger,
+  .section--final .egg-link {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section--final .egg-link {
+    margin-top: 12px;
+  }
+}.section--wish {
+  background: linear-gradient(140deg, #17192c 0%, #2b2435 52%, #3a2d3b 100%);
+}
+
+.story-inner {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 820px);
+  text-align: center;
+}
+
+.opening-name {
+  margin: 0;
+  font-family: "STKaiti", "KaiTi", "Microsoft YaHei", sans-serif;
+  font-size: clamp(44px, 9vw, 92px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0.06em;
+  text-shadow: 0 18px 48px rgba(0, 0, 0, 0.25);
+}
+
+.opening-date {
+  margin: 22px 0 0;
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 0.46em;
+}
+
+.opening-note {
+  width: min(100%, 560px);
+  margin: 34px auto 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 2;
+}
+
+.story-number {
+  display: block;
+  margin-bottom: 18px;
+  color: rgba(255, 227, 165, 0.72);
+  font-family: Georgia, serif;
+  font-size: 12px;
+  letter-spacing: 0.34em;
+}
+
+.story-title {
+  margin: 0;
+  font-family: "STKaiti", "KaiTi", "Microsoft YaHei", sans-serif;
+  font-size: clamp(32px, 5.2vw, 56px);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.story-lines {
+  width: min(100%, 650px);
+  margin: 30px auto 0;
+  color: rgba(255, 249, 239, 0.8);
+  font-size: clamp(15px, 2.1vw, 18px);
+  line-height: 2.05;
+}
+
+.story-lines p {
+  margin: 0.72em 0;
+}
+
+.story-quote {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 20px;
+  border-left: 1px solid rgba(255, 227, 165, 0.48);
+  color: rgba(255, 227, 165, 0.86);
+  font-family: "STKaiti", "KaiTi", serif;
+  font-size: 1.08em;
+  text-align: left;
+}
+
+.wish-card {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 52px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+  background: rgba(9, 15, 31, 0.36);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(12px);
+}
+
+.wish-card .story-lines {
+  margin-top: 24px;
+}
+
+.wish-signature {
+  margin: 30px 0 0;
+  color: rgba(255, 249, 239, 0.54);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+.egg-link {
+  margin-top: 30px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 850ms ease, transform 850ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fp-completely .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fp-completely .reveal:nth-child(2) { transition-delay: 100ms; }
+.fp-completely .reveal:nth-child(3) { transition-delay: 200ms; }
+.fp-completely .reveal:nth-child(4) { transition-delay: 300ms; }
+
+.story-nav {
+  position: fixed;
+  top: 50%;
+  left: 26px;
+  z-index: 20;
+  display: grid;
+  gap: 17px;
+  padding: 14px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(6, 12, 27, 0.68);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.3), inset 0 0 18px rgba(142, 184, 216, 0.08);
+  backdrop-filter: blur(12px);
+  transform: translateY(-50%);
+}
+
+.story-nav__dot {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.28);
+  cursor: pointer;
+  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.story-nav__dot:hover {
+  transform: scale(1.24);
+  border-color: var(--gold-soft);
+  box-shadow: 0 0 18px rgba(255, 227, 165, 0.68);
+}
+
+.story-nav__dot.is-active {
+  background: var(--gold-soft);
+  border-color: var(--gold-soft);
+  box-shadow: 0 0 14px rgba(255, 227, 165, 0.88), 0 0 30px rgba(242, 201, 125, 0.5);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  transform: translateX(-50%);
+  animation: hintFloat 2s ease-in-out infinite;
+}
+
+@keyframes hintFloat {
+  0%, 100% { transform: translate(-50%, 0); opacity: 0.45; }
+  50% { transform: translate(-50%, -6px); opacity: 0.85; }
+}
+
+@media (max-width: 740px) {
+  .memories-page .section {
+    padding: 64px 24px;
+  }
+
+  .story-lines {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .wish-card {
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+
+  .story-nav {
+    left: 8px;
+    gap: 13px;
+    padding: 10px 7px;
+  }
+
+  .story-nav__dot {
+    width: 13px;
+    height: 13px;
+  }
+
+  .scroll-hint {
+    bottom: 20px;
+  }
+}
+
+body:not(.fp-enabled) .reveal {
+  opacity: 1;
+  transform: none;
+}

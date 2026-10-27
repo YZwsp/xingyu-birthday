@@ -1,0 +1,371 @@
+﻿body.particle-page .cake-arrival {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 65%, rgba(255, 196, 104, 0.18), transparent 36%),
+    radial-gradient(circle at 50% 18%, rgba(111, 146, 191, 0.3), transparent 44%),
+    linear-gradient(145deg, rgba(5, 10, 24, 0.98), rgba(16, 31, 61, 0.96) 54%, rgba(44, 42, 70, 0.96));
+  transition: opacity 900ms ease, visibility 900ms ease;
+}
+
+body.particle-page .cake-arrival.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cake-arrival::before,
+.cake-arrival::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.cake-arrival::before {
+  inset: 0;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(circle, rgba(255, 245, 218, 0.9) 0 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(142, 184, 216, 0.8) 0 1px, transparent 1.5px);
+  background-position: 0 0, 58px 82px;
+  background-size: 172px 172px, 238px 238px;
+  animation: cakeStars 30s linear infinite;
+}
+
+.cake-arrival::after {
+  left: 50%;
+  bottom: 17%;
+  width: min(76vw, 660px);
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 204, 125, 0.24), transparent 68%);
+  filter: blur(8px);
+  transform: translateX(-50%);
+  animation: cakeGlow 2.2s ease-in-out infinite;
+}
+
+@keyframes cakeStars {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-172px, -172px, 0); }
+}
+
+@keyframes cakeGlow {
+  0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(0.92); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.06); }
+}
+
+.cake-arrival__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.cake-arrival__piece {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 200px;
+  height: 500px;
+  transform: translate(-50%, -68%) scale(1.04);
+  transform-origin: center center;
+}
+
+.cake-arrival #cakeIntro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  margin: 0;
+}
+
+.cake-arrival .cake-candles {
+  position: absolute;
+  top: auto;
+  bottom: 18.3%;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  opacity: 0;
+  transform: translate(-50%, -300px);
+  animation: cakeCandlesIn 720ms 5.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes cakeCandlesIn {
+  0% { opacity: 0; transform: translate(-50%, -300px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.cake-arrival .cake-candle {
+  position: relative;
+  display: block;
+  width: 9px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 5px 5px 3px 3px;
+  box-shadow: inset 2px 0 2px rgba(255, 255, 255, 0.45), 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.cake-arrival .cake-candle::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 2px;
+  height: 8px;
+  border-radius: 2px;
+  background: #46352f;
+  transform: translateX(-50%);
+}
+
+.cake-arrival .cake-candle--gold {
+  background: linear-gradient(90deg, #d8a957, #fff1bd 50%, #dbab61);
+}
+
+.cake-arrival .cake-candle--blue {
+  height: 55px;
+  background: linear-gradient(90deg, #6e92c3, #d7ecff 50%, #7096c9);
+}
+
+.cake-arrival .cake-candle--rose {
+  height: 42px;
+  background: linear-gradient(90deg, #bd7787, #ffd8df 50%, #c47d8d);
+}
+
+.cake-arrival .cake-flame {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  width: 11px;
+  height: 20px;
+  border-radius: 52% 48% 54% 46% / 68% 68% 32% 32%;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 68%, #fff8d6 0 16%, #ffd76f 42%, #ff9b4c 76%, rgba(255, 120, 60, 0) 78%);
+  box-shadow: 0 0 10px 5px rgba(255, 202, 103, 0.44), 0 0 30px 14px rgba(255, 174, 82, 0.18);
+  transform: translateX(-50%) scale(0.8);
+  transform-origin: 50% 100%;
+  animation:
+    cakeFlameIgnite 220ms 6.5s ease-out forwards,
+    cakeFlameFlicker 480ms 6.72s ease-in-out infinite alternate;
+}
+
+.cake-arrival .cake-candle--blue .cake-flame {
+  animation-delay: 0s, 120ms;
+}
+
+.cake-arrival .cake-candle--rose .cake-flame {
+  animation-delay: 0s, 240ms;
+}
+
+@keyframes cakeFlameIgnite {
+  to { opacity: 1; }
+}
+
+@keyframes cakeFlameFlicker {
+  from { transform: translateX(-50%) scale(0.9, 0.96) rotate(-3deg); }
+  to { transform: translateX(-50%) scale(1.06, 1.1) rotate(3deg); }
+}
+
+.cake-arrival .cake-smoke {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  opacity: 0;
+  background: rgba(220, 227, 236, 0.62);
+  filter: blur(1.5px);
+  transform: translate(-50%, 10px) scale(0.4);
+}
+
+.cake-arrival.is-blowing .cake-flame {
+  animation: cakeFlameBlowOut 620ms ease-out forwards;
+}
+
+.cake-arrival.is-blowing .cake-candle--blue .cake-flame {
+  animation-delay: 100ms;
+}
+
+.cake-arrival.is-blowing .cake-candle--rose .cake-flame {
+  animation-delay: 200ms;
+}
+
+@keyframes cakeFlameBlowOut {
+  0% { opacity: 1; transform: translateX(-50%) scale(1); }
+  45% { opacity: 0.9; transform: translateX(-50%) scaleX(1.38) skewX(16deg); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.18); }
+}
+
+.cake-arrival.is-blowing .cake-smoke {
+  animation: cakeSmokeRise 1.8s ease-out forwards;
+}
+
+.cake-arrival.is-blowing .cake-candle--blue .cake-smoke {
+  animation-delay: 120ms;
+}
+
+.cake-arrival.is-blowing .cake-candle--rose .cake-smoke {
+  animation-delay: 240ms;
+}
+
+@keyframes cakeSmokeRise {
+  0% { opacity: 0; transform: translate(-50%, 8px) scale(0.35); }
+  24% { opacity: 0.76; }
+  100% { opacity: 0; transform: translate(-50%, -52px) scale(1.7); }
+}
+
+.cake-arrival .cake-part {
+  opacity: 0;
+}
+
+.cake-arrival.is-visible .cake-part-2 {
+  animation: cakePartShow 80ms 2s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-3 {
+  animation: cakePartShow 80ms 2.8s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-4 {
+  animation: cakePartShow 80ms 3.3s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-5 {
+  animation: cakePartShow 80ms 3.8s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-6 {
+  animation: cakePartShow 80ms 4.3s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-cream {
+  animation: cakePartShow 80ms 4.6s forwards;
+}
+
+@keyframes cakePartShow {
+  to { opacity: 1; }
+}
+
+.cake-arrival .come {
+  opacity: 0;
+  animation: cakeBaseIn 420ms 5s ease-out forwards;
+}
+
+@keyframes cakeBaseIn {
+  to { opacity: 1; }
+}
+
+.cake-arrival__actions {
+  position: absolute;
+  left: 50%;
+  bottom: 14%;
+  z-index: 6;
+  transform: translateX(-50%);
+}
+
+.blow-button {
+  min-width: 166px;
+  padding: 13px 28px;
+  border: 1px solid rgba(255, 227, 165, 0.72);
+  border-radius: 999px;
+  color: #1b1a1b;
+  background: linear-gradient(135deg, #ffe9b3, #efc36f);
+  box-shadow: 0 12px 34px rgba(242, 201, 125, 0.22);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 500ms ease, transform 500ms ease, filter 220ms ease;
+}
+
+.cake-arrival.is-ready .blow-button {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  animation: blowButtonPulse 2.2s ease-in-out infinite;
+}
+
+.cake-arrival.is-blowing .blow-button {
+  pointer-events: none;
+  animation: none;
+  filter: saturate(0.5);
+}
+
+@keyframes blowButtonPulse {
+  0%, 100% { box-shadow: 0 12px 34px rgba(242, 201, 125, 0.2); }
+  50% { box-shadow: 0 14px 42px rgba(242, 201, 125, 0.42); }
+}
+
+.cake-arrival__copy {
+  position: absolute;
+  left: 50%;
+  bottom: 5.5%;
+  z-index: 3;
+  width: min(88vw, 620px);
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, 16px);
+}
+
+.cake-arrival.is-visible .cake-arrival__copy {
+  animation: cakeCopyIn 900ms 5.8s ease forwards;
+}
+
+.cake-arrival__copy span {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+}
+
+.cake-arrival__copy p {
+  margin: 10px 0 0;
+  color: rgba(255, 249, 239, 0.78);
+  font-family: "STKaiti", "KaiTi", "Microsoft YaHei", sans-serif;
+  font-size: clamp(18px, 3vw, 26px);
+  letter-spacing: 0.06em;
+}
+
+@keyframes cakeCopyIn {
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.birthday-blackout {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: #000;
+  transition: opacity 2.1s ease, visibility 2.1s ease;
+}
+
+.birthday-blackout.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 640px) {
+  .cake-arrival__piece {
+    top: 47%;
+    transform: translate(-50%, -66%) scale(0.84);
+  }
+
+  .cake-arrival__actions {
+    bottom: 12%;
+  }
+
+  .blow-button {
+    min-width: 150px;
+  }
+
+  .cake-arrival__copy {
+    bottom: 3.5%;
+  }
+}

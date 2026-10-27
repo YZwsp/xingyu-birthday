@@ -1,0 +1,460 @@
+.gift-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 24px;
+  padding: 13px 26px;
+  border: 1px solid rgba(255, 227, 165, 0.7);
+  border-radius: 999px;
+  color: #211b1c;
+  background: linear-gradient(135deg, #fff0bd, #f0c66f);
+  box-shadow: 0 12px 34px rgba(242, 201, 125, 0.24);
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+
+.gift-trigger:hover {
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.04);
+  box-shadow: 0 16px 42px rgba(242, 201, 125, 0.38);
+}
+
+.gift-trigger__icon {
+  font-size: 1.08em;
+}
+
+body.gift-open {
+  overflow: hidden;
+}
+
+.gift-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1600;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 214, 122, 0.22), transparent 28%),
+    radial-gradient(circle at 18% 20%, rgba(130, 173, 220, 0.18), transparent 34%),
+    rgba(3, 7, 17, 0.93);
+  backdrop-filter: blur(12px);
+  transition: opacity 520ms ease, visibility 520ms ease;
+}
+
+.gift-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gift-overlay__rays {
+  position: absolute;
+  width: 150vmax;
+  height: 150vmax;
+  opacity: 0.16;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 7deg,
+    rgba(255, 226, 157, 0.65) 8deg 10deg,
+    transparent 11deg 22deg
+  );
+  animation: giftRays 16s linear infinite;
+}
+
+.gift-overlay__halo {
+  position: absolute;
+  width: min(76vw, 760px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 225, 144, 0.28), rgba(255, 225, 144, 0.05) 44%, transparent 70%);
+  filter: blur(6px);
+  animation: giftHalo 2.6s ease-in-out infinite;
+}
+
+.gift-ring {
+  position: absolute;
+  width: min(48vw, 440px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 227, 165, 0.55);
+  border-radius: 50%;
+  opacity: 0;
+  animation: giftRingBurst 2.4s ease-out both;
+}
+
+.gift-ring--two {
+  width: min(62vw, 580px);
+  animation-delay: 180ms;
+}
+
+.gift-stage {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  justify-items: center;
+  width: min(92vw, 980px);
+  text-align: center;
+}
+
+.gift-badge {
+  margin-bottom: 30px;
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 227, 165, 0.32);
+  border-radius: 999px;
+  color: rgba(255, 244, 215, 0.78);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  opacity: 0;
+  animation: giftItemIn 600ms 2.7s ease forwards;
+}
+
+.gift-three-d {
+  perspective: 980px;
+  perspective-origin: 50% 45%;
+}
+
+.gift-word-spin {
+  display: block;
+  transform-style: preserve-3d;
+  opacity: 0;
+  animation: giftWordSpin 4.7s cubic-bezier(0.16, 0.84, 0.24, 1) 200ms both;
+}
+
+.gift-word {
+  display: inline-block;
+  color: #fff5c9;
+  font-family: "STKaiti", "Kaiti SC", "KaiTi", "Songti SC", "SimSun", serif;
+  font-size: clamp(58px, 12vw, 126px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 0 #f8d879,
+    0 2px 0 #efc661,
+    0 3px 0 #e4b64d,
+    0 4px 0 #d8a53e,
+    0 5px 0 #c99032,
+    0 8px 0 #754316,
+    0 12px 22px rgba(0, 0, 0, 0.55),
+    0 0 26px rgba(255, 219, 121, 0.55);
+  transform-style: preserve-3d;
+}
+
+.gift-caption {
+  margin: 30px 0 0;
+  color: rgba(255, 249, 239, 0.74);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  opacity: 0;
+  animation: giftItemIn 650ms 3.4s ease forwards;
+}
+
+/* 文案变长了，给它一个宽度，手机上分两行，别顶到屏幕边 */
+.gift-caption {
+  max-width: min(86vw, 680px);
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+}
+
+.gift-close {
+  margin-top: 22px;
+  padding: 11px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  opacity: 0;
+  animation: giftItemIn 650ms 3.9s ease forwards;
+  transition: color 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.gift-close:hover {
+  color: var(--gold-soft);
+  border-color: rgba(255, 227, 165, 0.58);
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.gift-particle {
+  position: absolute;
+  z-index: 3;
+  color: #ffd978;
+  font-size: var(--size, 18px);
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 12px currentColor;
+  animation: giftBurst var(--duration, 1.5s) ease-out var(--delay, 0s) both;
+}
+
+.gift-float {
+  position: absolute;
+  bottom: -70px;
+  z-index: 2;
+  font-size: var(--size, 24px);
+  opacity: 0;
+  pointer-events: none;
+  animation: giftFloat var(--duration, 4.8s) linear var(--delay, 0s) both;
+}
+
+/* 星轨版：星空、流星、光尘、暖雾 */
+.gift-aurora {
+  position: absolute;
+  inset: -22%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 28% 34%, rgba(242, 201, 125, 0.24), transparent 40%),
+    radial-gradient(circle at 74% 62%, rgba(142, 184, 216, 0.18), transparent 44%),
+    radial-gradient(circle at 52% 82%, rgba(231, 165, 171, 0.14), transparent 38%);
+  filter: blur(24px);
+  opacity: 0.85;
+  animation: giftAurora 15s ease-in-out infinite alternate;
+}
+
+.gift-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gift-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffe3a5;
+  box-shadow: 0 0 6px rgba(255, 227, 165, 0.72);
+  opacity: 0;
+  animation: giftTwinkle var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.gift-dust {
+  position: absolute;
+  bottom: -8px;
+  width: var(--size, 2px);
+  height: var(--size, 2px);
+  border-radius: 50%;
+  background: rgba(255, 231, 170, 0.92);
+  box-shadow: 0 0 8px rgba(255, 227, 165, 0.62);
+  opacity: 0;
+  animation: giftDust var(--dur, 9s) linear var(--delay, 0s) infinite;
+}
+
+.gift-shooting {
+  position: absolute;
+  left: var(--x, 10%);
+  top: var(--y, 10%);
+  width: 150px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 246, 221, 0.95), transparent);
+  box-shadow: 0 0 10px rgba(255, 227, 165, 0.8);
+  opacity: 0;
+  transform: rotate(35deg);
+  animation: giftShoot 5.4s ease-in var(--delay, 1s) infinite;
+}
+
+.gift-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: min(82vw, 560px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.62;
+  transform: translate(-50%, -50%);
+  animation: giftOrbitSpin 42s linear infinite;
+}
+
+.gift-orbit__star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--size, 3px);
+  height: var(--size, 3px);
+  margin: calc(var(--size, 3px) / -2);
+  border-radius: 50%;
+  background: #fff1c9;
+  box-shadow: 0 0 7px rgba(255, 227, 165, 0.72);
+  transform: rotate(var(--a)) translateX(calc(min(82vw, 560px) / 2));
+}
+
+@keyframes giftAurora {
+  0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+  100% { transform: translate3d(2%, 1%, 0) scale(1.08); }
+}
+
+@keyframes giftTwinkle {
+  0%, 100% { opacity: 0.08; transform: scale(0.8); }
+  50% { opacity: var(--peak, 0.8); transform: scale(1); }
+}
+
+@keyframes giftDust {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.6); }
+  12% { opacity: 0.75; }
+  70% { opacity: 0.5; }
+  100% { opacity: 0; transform: translate3d(var(--drift, 0), -80vh, 0) scale(1.1); }
+}
+
+@keyframes giftShoot {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(35deg) scaleX(0.2); }
+  8% { opacity: 1; }
+  35% { opacity: 1; }
+  55%, 100% { opacity: 0; transform: translate3d(55vw, 55vh, 0) rotate(35deg) scaleX(1); }
+}
+
+@keyframes giftOrbitSpin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes giftRays {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes giftHalo {
+  0%, 100% { transform: scale(0.92); opacity: 0.65; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes giftRingBurst {
+  0% { opacity: 0; transform: scale(0.22); }
+  24% { opacity: 0.9; }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+
+.gift-overlay.is-closing .gift-word-spin {
+  animation: giftWordExit 1.08s cubic-bezier(0.55, 0.05, 0.72, 0.36) both;
+}
+
+.gift-overlay.is-closing .gift-badge {
+  animation: giftItemExit 650ms ease forwards;
+}
+
+.gift-overlay.is-closing .gift-caption {
+  animation: giftItemExit 650ms 80ms ease forwards;
+}
+
+.gift-overlay.is-closing .gift-close {
+  animation: giftItemExit 650ms 140ms ease forwards;
+}
+
+@keyframes giftWordSpin {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 34px, -900px) rotateX(30deg) rotateY(-540deg) scale(0.16);
+  }
+  18% {
+    opacity: 1;
+    transform: translate3d(0, 0, 80px) rotateX(13deg) rotateY(-80deg) scale(1.14);
+  }
+  64% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(6deg) rotateY(790deg) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(1080deg) scale(1);
+  }
+}
+
+@keyframes giftWordExit {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0deg) scale(1);
+  }
+  35% {
+    opacity: 1;
+    transform: translate3d(0, 0, 120px) rotateX(-8deg) rotateY(180deg) scale(1.14);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -90px, -520px) rotateX(-34deg) rotateY(540deg) scale(0.16);
+  }
+}
+
+@keyframes giftItemExit {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes giftItemIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes giftBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+  16% { opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(var(--scale, 1.1)) rotate(var(--rotate, 120deg));
+  }
+}
+
+@keyframes giftFloat {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.6) rotate(-12deg);
+  }
+  12% { opacity: 0.9; }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 30px), -118vh, 0) scale(1.25) rotate(24deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .gift-word {
+    font-size: clamp(48px, 17vw, 82px);
+    letter-spacing: 0.06em;
+  }
+
+  .gift-badge {
+    margin-bottom: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-overlay__rays,
+  .gift-overlay__halo,
+  .gift-ring,
+  .gift-particle,
+  .gift-float,
+  .gift-dust,
+  .gift-shooting,
+  .gift-orbit {
+    display: none;
+  }
+
+  .gift-word-spin,
+  .gift-badge,
+  .gift-caption,
+  .gift-close {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  .gift-aurora,
+  .gift-star {
+    animation: none;
+  }
+
+  .gift-star {
+    opacity: 0.45;
+  }
+}
+
