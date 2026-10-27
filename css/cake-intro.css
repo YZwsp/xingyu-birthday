@@ -1,4 +1,4 @@
-body.particle-page .cake-arrival {
+﻿body.particle-page .cake-arrival {
   position: fixed;
   inset: 0;
   z-index: 20;
@@ -66,64 +66,199 @@ body.particle-page .cake-arrival.is-visible {
 
 .cake-arrival__piece {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
-  width: min(88vw, 540px);
-  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 500px;
+  transform: translate(-50%, -68%) scale(1.04);
   transform-origin: center center;
-  opacity: 1;
-  will-change: transform, opacity;
 }
 
-.cake-arrival.is-visible .cake-arrival__piece {
-  animation: cakeRise 1200ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-@keyframes cakeRise {
-  0% { opacity: 0; transform: translate(-50%, -44%) scale(0.86); }
-  60% { opacity: 1; }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
-.cake-intro-art {
+.cake-arrival #cakeIntro {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 28px 42px rgba(0, 0, 0, 0.32));
-  animation: cakeFloat 5s ease-in-out infinite;
+  margin: 0;
 }
 
-@keyframes cakeFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
-}
-
-.cake-intro-art .cake-svg-flame {
-  transform-box: fill-box;
-  transform-origin: center bottom;
+.cake-arrival .cake-candles {
+  position: absolute;
+  top: auto;
+  bottom: 18.3%;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
   opacity: 0;
-  animation:
-    cakeSvgIgnite 220ms 5.8s ease-out forwards,
-    cakeSvgFlicker 480ms 5.9s ease-in-out infinite alternate;
+  transform: translate(-50%, -300px);
+  animation: cakeCandlesIn 720ms 5.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-@keyframes cakeSvgIgnite {
+@keyframes cakeCandlesIn {
+  0% { opacity: 0; transform: translate(-50%, -300px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.cake-arrival .cake-candle {
+  position: relative;
+  display: block;
+  width: 9px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 5px 5px 3px 3px;
+  box-shadow: inset 2px 0 2px rgba(255, 255, 255, 0.45), 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.cake-arrival .cake-candle::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 2px;
+  height: 8px;
+  border-radius: 2px;
+  background: #46352f;
+  transform: translateX(-50%);
+}
+
+.cake-arrival .cake-candle--gold {
+  background: linear-gradient(90deg, #d8a957, #fff1bd 50%, #dbab61);
+}
+
+.cake-arrival .cake-candle--blue {
+  height: 55px;
+  background: linear-gradient(90deg, #6e92c3, #d7ecff 50%, #7096c9);
+}
+
+.cake-arrival .cake-candle--rose {
+  height: 42px;
+  background: linear-gradient(90deg, #bd7787, #ffd8df 50%, #c47d8d);
+}
+
+.cake-arrival .cake-flame {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  width: 11px;
+  height: 20px;
+  border-radius: 52% 48% 54% 46% / 68% 68% 32% 32%;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 68%, #fff8d6 0 16%, #ffd76f 42%, #ff9b4c 76%, rgba(255, 120, 60, 0) 78%);
+  box-shadow: 0 0 10px 5px rgba(255, 202, 103, 0.44), 0 0 30px 14px rgba(255, 174, 82, 0.18);
+  transform: translateX(-50%) scale(0.8);
+  transform-origin: 50% 100%;
+  animation:
+    cakeFlameIgnite 220ms 6.5s ease-out forwards,
+    cakeFlameFlicker 480ms 6.72s ease-in-out infinite alternate;
+}
+
+.cake-arrival .cake-candle--blue .cake-flame {
+  animation-delay: 0s, 120ms;
+}
+
+.cake-arrival .cake-candle--rose .cake-flame {
+  animation-delay: 0s, 240ms;
+}
+
+@keyframes cakeFlameIgnite {
   to { opacity: 1; }
 }
 
-@keyframes cakeSvgFlicker {
-  from { transform: scaleY(0.86) scaleX(0.92) rotate(-2deg); opacity: 0.78; }
-  to { transform: scaleY(1.1) scaleX(1.04) rotate(2deg); opacity: 1; }
+@keyframes cakeFlameFlicker {
+  from { transform: translateX(-50%) scale(0.9, 0.96) rotate(-3deg); }
+  to { transform: translateX(-50%) scale(1.06, 1.1) rotate(3deg); }
 }
 
-.cake-arrival.is-blowing .cake-svg-flame {
-  animation: cakeSvgBlowOut 620ms ease-out forwards;
+.cake-arrival .cake-smoke {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  opacity: 0;
+  background: rgba(220, 227, 236, 0.62);
+  filter: blur(1.5px);
+  transform: translate(-50%, 10px) scale(0.4);
 }
 
-@keyframes cakeSvgBlowOut {
-  0% { opacity: 1; transform: scale(1); }
-  45% { opacity: 0.9; transform: scaleX(1.35) skewX(14deg); }
-  100% { opacity: 0; transform: translateY(10px) scale(0.18); }
+.cake-arrival.is-blowing .cake-flame {
+  animation: cakeFlameBlowOut 620ms ease-out forwards;
+}
+
+.cake-arrival.is-blowing .cake-candle--blue .cake-flame {
+  animation-delay: 100ms;
+}
+
+.cake-arrival.is-blowing .cake-candle--rose .cake-flame {
+  animation-delay: 200ms;
+}
+
+@keyframes cakeFlameBlowOut {
+  0% { opacity: 1; transform: translateX(-50%) scale(1); }
+  45% { opacity: 0.9; transform: translateX(-50%) scaleX(1.38) skewX(16deg); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.18); }
+}
+
+.cake-arrival.is-blowing .cake-smoke {
+  animation: cakeSmokeRise 1.8s ease-out forwards;
+}
+
+.cake-arrival.is-blowing .cake-candle--blue .cake-smoke {
+  animation-delay: 120ms;
+}
+
+.cake-arrival.is-blowing .cake-candle--rose .cake-smoke {
+  animation-delay: 240ms;
+}
+
+@keyframes cakeSmokeRise {
+  0% { opacity: 0; transform: translate(-50%, 8px) scale(0.35); }
+  24% { opacity: 0.76; }
+  100% { opacity: 0; transform: translate(-50%, -52px) scale(1.7); }
+}
+
+.cake-arrival .cake-part {
+  opacity: 0;
+}
+
+.cake-arrival.is-visible .cake-part-2 {
+  animation: cakePartShow 80ms 2s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-3 {
+  animation: cakePartShow 80ms 2.8s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-4 {
+  animation: cakePartShow 80ms 3.3s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-5 {
+  animation: cakePartShow 80ms 3.8s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-6 {
+  animation: cakePartShow 80ms 4.3s forwards;
+}
+
+.cake-arrival.is-visible .cake-part-cream {
+  animation: cakePartShow 80ms 4.6s forwards;
+}
+
+@keyframes cakePartShow {
+  to { opacity: 1; }
+}
+
+.cake-arrival .come {
+  opacity: 0;
+  animation: cakeBaseIn 420ms 5s ease-out forwards;
+}
+
+@keyframes cakeBaseIn {
+  to { opacity: 1; }
 }
 
 .cake-arrival__actions {
@@ -218,7 +353,8 @@ body.particle-page .cake-arrival.is-visible {
 
 @media (max-width: 640px) {
   .cake-arrival__piece {
-    width: min(92vw, 380px);
+    top: 47%;
+    transform: translate(-50%, -66%) scale(0.84);
   }
 
   .cake-arrival__actions {
@@ -231,20 +367,5 @@ body.particle-page .cake-arrival.is-visible {
 
   .cake-arrival__copy {
     bottom: 3.5%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cake-arrival::before,
-  .cake-arrival::after,
-  .cake-arrival__piece,
-  .cake-intro-art,
-  .cake-svg-flame,
-  .cake-arrival__copy {
-    animation: none !important;
-  }
-
-  .cake-svg-flame {
-    opacity: 1;
   }
 }
