@@ -31,6 +31,10 @@ S.Drawing = (function () {
                        window.setTimeout(callback, 1000 / 60);
                      };
 
+  var areaW = 0,
+      areaH = 0,
+      dpr = 1;
+
   return {
     init: function (el) {
       canvas = document.querySelector(el);
@@ -50,16 +54,29 @@ S.Drawing = (function () {
     },
 
     adjustCanvas: function () {
-      canvas.width = window.innerWidth-20;
-      canvas.height = window.innerHeight-20;
+      var w = window.innerWidth - 20,
+          h = window.innerHeight - 20;
+
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      areaW = w;
+      areaH = h;
+
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
     },
 
     clearFrame: function () {
+      context.save();
+      context.setTransform(1, 0, 0, 1, 0, 0);
       context.clearRect(0, 0, canvas.width, canvas.height);
+      context.restore();
     },
 
     getArea: function () {
-      return { w: canvas.width, h: canvas.height };
+      return { w: areaW, h: areaH };
     },
 
     drawCircle: function (p, c) {
@@ -470,7 +487,7 @@ S.Dot.prototype = {
 
 
 S.ShapeBuilder = (function () {
-  var gap = 13,
+  var gap = 10,
       shapeCanvas = document.createElement('canvas'),
       shapeContext = shapeCanvas.getContext('2d'),
       fontSize = 500,
@@ -669,7 +686,7 @@ S.Shape = (function () {
           x: n.dots[i].x + cx,
           y: n.dots[i].y + cy,
           a: 1,
-          z: 5,
+          z: 4,
           h: 0
         }));
 
